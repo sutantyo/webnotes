@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   # GET /pages/1.json
   def show
     if @page.is_root?
-      @title = @siteTitle
+      @title = "Web Programming Stuffs"
     else
       @title = @page.parent.title
     end
@@ -20,13 +20,13 @@ class PagesController < ApplicationController
 
   # GET /pages/new
   def new
-    @parent = params[:page] unless params[:page].nil?
+    @parent = params[:page_id] unless params[:page_id].nil?
     @page = Page.new
   end
 
   # GET /pages/1/edit
   def edit
-    @parent = @page.parent.id unless !@parent
+    @parent = @page.parent.id unless @page.parent.nil?
   end
 
   # POST /pages
