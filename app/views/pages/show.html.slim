@@ -1,0 +1,37 @@
+.container
+
+  .jumbotron.h1 Web Programming Stuffs
+
+  .row
+    .col-sm-3
+      - Page.roots.order(:order).each do |page|
+        li 
+          = link_to page.title, page, class: ("active" if @page.root == page)
+          - if @page.ancestors.include? page
+            - page.children.order(:order).order(:title).each do |subpage|
+              li style="padding-left: 18px; list-style-type: none" 
+                =link_to subpage.title, subpage
+          - elsif @page == page
+            - @page.children.order(:order).order(:title).each do |subpage|
+              li style="padding-left: 18px; list-style-type: none" 
+                =link_to subpage.title, subpage
+
+      li
+        = link_to 'Add a new page', new_page_path
+
+
+    .col-sm-9
+      
+      h2 = @page.title
+      => link_to 'Edit', edit_page_path(@page)
+      - if (@page.is_root?)
+        '|
+        =<> link_to 'Create Child', new_page_path(page: @page.id)
+      br
+      br
+
+      div
+        = raw coderay(@page.content)
+
+      
+

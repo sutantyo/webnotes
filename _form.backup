@@ -1,0 +1,30 @@
+= form_for @page do |f|
+  - if @page.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+      ul
+        - @page.errors.full_messages.each do |message|
+          li = message
+  form role="form"
+    .form-group
+      .field
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
+    .form-group
+      .field
+        = f.label :abstract
+        = f.text_area :abstract, class: 'form-control'
+    .form-group
+      .field
+        = f.label :content
+        = f.text_area :content, class: 'form-control'
+    .form-group
+      .field
+        label
+          = f.check_box :is_major_category 
+            Major Category
+    .form-group
+      .field
+        = f.label :parent_id
+        = f.collection_select :parent_id, Page.all.where(is_major_category: true), :id, :title, include_blank: true
+    .actions = f.submit 'Save'

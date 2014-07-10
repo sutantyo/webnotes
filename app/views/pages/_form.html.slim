@@ -1,0 +1,10 @@
+= bootstrap_form_for(@page) do |f|
+  
+    = f.submit
+    = f.text_field :title
+    = f.collection_select :parent_id, Page.roots, :id, :title, {include_blank: true, selected: @parent}, control_col: "col-sm-9" 
+    = f.number_field :order
+    = f.text_area :abstract, style: "height: 80px"
+    = f.text_area :content, style: "height: 400px"
+    = f.submit
+
