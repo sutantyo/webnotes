@@ -4,9 +4,9 @@
 
   .row
     .col-sm-3
-      - Page.roots.each do |page|
+      - Page.roots.order(:order).each do |page|
         li 
-          = link_to page.title, page
+          = link_to page.title, page, class: ("active" if @page.root == page)
       - if user_signed_in?
         li
           = link_to 'Add a new page', new_page_path
