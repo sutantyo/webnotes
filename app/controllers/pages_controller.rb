@@ -20,13 +20,13 @@ class PagesController < ApplicationController
 
   # GET /pages/new
   def new
-    @parent = params[:page] unless params[:page].nil?
+    @parent = params[:page] unless !params[:page]
     @page = Page.new
   end
 
   # GET /pages/1/edit
   def edit
-    @parent = @page.parent.id
+    @parent = @page.parent.id unless !@parent
   end
 
   # POST /pages
