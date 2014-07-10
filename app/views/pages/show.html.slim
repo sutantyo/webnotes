@@ -16,18 +16,20 @@
               li style="padding-left: 18px; list-style-type: none" 
                 =link_to subpage.title, subpage
 
-      li
-        = link_to 'Add a new page', new_page_path
+      - if user_signed_in?
+        li
+          = link_to 'Add a new page', new_page_path
 
 
     .col-sm-9
       
       h2 = @page.title
-      => link_to 'Edit', edit_page_path(@page)
-      - if (@page.is_root?)
-        '|
-        =<> link_to 'Create Child', new_page_path(page: @page.id)
-      br
+      - if user_signed_in?
+        => link_to 'Edit', edit_page_path(@page)
+        - if (@page.is_root?)
+          '|
+          =<> link_to 'Create Child', new_page_path(page_id: @page)
+        br
       br
 
       div
