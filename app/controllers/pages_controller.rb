@@ -20,7 +20,7 @@ class PagesController < ApplicationController
 
   # GET /pages/new
   def new
-    @parent = params[:page] unless !params[:page]
+    @parent = params[:page] unless params[:page].nil?
     @page = Page.new
   end
 
